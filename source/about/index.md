@@ -17,7 +17,8 @@ date: 2015-10-30 13:15:48
 ----------
 ### 专业技能
 - 掌握java语言和面向对象思想，有良好的代码书写规范； 熟练掌握Java，JSP等开发语言；
-- 熟练掌握多种Java设计模式思想；熟练掌握MySQL，Oracle等数据库，项目中有实际分库分表经验，项目中经常使用memcached、nosql（redis）；
+- 熟练掌握多种Java设计模式思想；
+- 熟练掌握MySQL，Oracle等数据库，项目中有实际分库分表经验，项目中经常使用memcached、nosql（redis）；
 - 熟练配置应用tomcat、resin，nginx等服务器；
 - 熟练掌握springMVC,ibatis,struts,hibernate3等框架，J2EE等主流IT技术；熟悉thrift、webService、hessain技术；
 - 熟悉python、lua等脚本语言，在项目中应用这些脚本语言进行了相应开发；
