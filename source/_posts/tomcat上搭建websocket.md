@@ -167,6 +167,7 @@ category: 技术
 1、因为是使用Tomcat的WebSocket，所以pom中需要配置tomcat-websocket-api的包，在7.0.27之后的tomcat的lib包中会包含这个包
 2、在pom中，把改包配置成scope设置为provided，防止和tomcat中的冲突，这样打包的时候不会包含该lib
 3、如果session关闭，请注意把session从池中移除掉
+4、jsp中创建WebSocket的地方，注意修改IP，总是忘记改这个，好多时候服务器上的连接无法创建，可以考虑从配置文件或者DB中获取
 
 
 
