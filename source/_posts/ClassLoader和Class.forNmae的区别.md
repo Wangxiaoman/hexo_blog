@@ -30,7 +30,7 @@ class的装载大体分了三步：加载（loading）、链接（linking）、�
 
 * java中的所有类，都需要加载到jvm中才能运行，类加载器的作用实际是把类文件中的字节码加载到内存中，jvm加载类都是通过ClassLoader的loadclass方法来加载的，ClassLoader是采用双亲委托的机制来加载类。
 
-BootStrapClassLoader <-> ExtClassLoader <-> AppClassLoader
+BootStrap ClassLoader <-> Ext ClassLoader <-> App ClassLoader
 
 * ClassLoader中的几个内部的属性以及内部类
 		// parent class loader
