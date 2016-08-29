@@ -6,7 +6,7 @@ category: 技术
 
 ### 概述
 
-参考官方文档：ThreadLocal的用法，这个类提供“thread-local”变量，这些变量与线程的局部变量不同，每个线程都保存一份改变量的副本，可以通过get或者set方法访问。如果开发者希望将类的某个静态变量与线程状态关联，则可以考虑使用ThreadLocal，例如拦截器中使用StopWatch来监控方法消耗时长。
+参考官方文档：ThreadLocal的用法，这个类提供“thread-local”变量，这些变量与线程的局部变量不同，每个线程都保存一份改变量的副本，可以通过get或者set方法访问。如果开发者希望将类的某个静态变量与线程状态关联，则可以考虑使用ThreadLocal，例如在Spring的拦截器中使用StopWatch来监控方法消耗时长。
 
 
 <!--more-->
@@ -16,15 +16,16 @@ category: 技术
 * ThreadLocal的静态内部类ThreadLocalMap，核心操作都是对这个map的操作
 
 * ThreadLocalMap的entry的结构如下
- 	static class Entry extends WeakReference<ThreadLocal> {
-        /** The value associated with this ThreadLocal. */
-        Object value;
 
-        Entry(ThreadLocal k, Object v) {
-            super(k);
-            value = v;
-        }
-    }
+		static class Entry extends WeakReference<ThreadLocal> {
+	        /** The value associated with this ThreadLocal. */
+	        Object value;
+
+	        Entry(ThreadLocal k, Object v) {
+	            super(k);
+	            value = v;
+	        }
+	    }
 
 * Thread类中有如下属性，这样ThreadLocal可以通过Thread的对象直接获取（ThradLocal和Thread都在lang包下）
 	ThreadLocal.ThreadLocalMap threadLocals = null;
