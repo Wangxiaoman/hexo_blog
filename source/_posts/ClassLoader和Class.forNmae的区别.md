@@ -1,6 +1,6 @@
 title: ClassLoader和Class.forName在加载类上的区别
 date: 2016-08-29 15:54:49
-tags: [java,ClassLoader]
+tags: [java,JVM]
 category: 技术
 ---
 
