@@ -33,6 +33,7 @@ category: 技术
 ### 核心源码分析
 
 #### get方法
+
     	public T get() {
             Thread t = Thread.currentThread();//1
             ThreadLocalMap map = getMap(t);//2
@@ -50,6 +51,7 @@ category: 技术
 4.如果这个map为空，那么调用setInitialValue来进行初始化
 
 #### setInitialValue方法
+
     	private T setInitialValue() {
             T value = initialValue();//1
             Thread t = Thread.currentThread();//2
