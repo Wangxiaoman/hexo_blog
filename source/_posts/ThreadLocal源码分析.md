@@ -33,16 +33,16 @@ category: 技术
 ### 核心源码分析
 
 #### get方法
-	public T get() {
-        Thread t = Thread.currentThread();//1
-        ThreadLocalMap map = getMap(t);//2
-        if (map != null) {//3
-            ThreadLocalMap.Entry e = map.getEntry(this);
-            if (e != null)
-                return (T)e.value;
+    	public T get() {
+            Thread t = Thread.currentThread();//1
+            ThreadLocalMap map = getMap(t);//2
+            if (map != null) {//3
+                ThreadLocalMap.Entry e = map.getEntry(this);
+                if (e != null)
+                    return (T)e.value;
+            }
+            return setInitialValue();//4
         }
-        return setInitialValue();//4
-    }
 
 1.获取当前线程对象
 2.获取这个对象中的ThreadLocalMap
@@ -50,20 +50,20 @@ category: 技术
 4.如果这个map为空，那么调用setInitialValue来进行初始化
 
 #### setInitialValue方法
-	private T setInitialValue() {
-        T value = initialValue();//1
-        Thread t = Thread.currentThread();//2
-        ThreadLocalMap map = getMap(t);//3
-        if (map != null)
-            map.set(this, value);
-        else
-            createMap(t, value);//4
-        return value;
-    }
+    	private T setInitialValue() {
+            T value = initialValue();//1
+            Thread t = Thread.currentThread();//2
+            ThreadLocalMap map = getMap(t);//3
+            if (map != null)
+                map.set(this, value);
+            else
+                createMap(t, value);//4
+            return value;
+        }
 
-	void createMap(Thread t, T firstValue) {//5
-        t.threadLocals = new ThreadLocalMap(this, firstValue);
-    }
+    	void createMap(Thread t, T firstValue) {//5
+            t.threadLocals = new ThreadLocalMap(this, firstValue);
+        }
 
 1.调用场景为get方法获取value，但是ThreadLocalMap还没有创建，那么初始化一个null值
 2.获取当前线程
@@ -73,15 +73,15 @@ category: 技术
 
 #### remove方法
 
-	public void remove() {
-         ThreadLocalMap m = getMap(Thread.currentThread());//1
-         if (m != null)
-             m.remove(this);//2
-    }
+    	public void remove() {
+             ThreadLocalMap m = getMap(Thread.currentThread());//1
+             if (m != null)
+                 m.remove(this);//2
+        }
 
-	ThreadLocalMap getMap(Thread t) {
-        return t.threadLocals;
-    }
+    	ThreadLocalMap getMap(Thread t) {
+            return t.threadLocals;
+        }
 
 1.根据Thread对象，获取ThreadLocalMap
 2.map不为空，那么删除该key
