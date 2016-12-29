@@ -6,14 +6,15 @@ category: 技术
 
 ### 概述
 
-一直关注spring cloud，以后做微服务必将其发扬光大，所以结合源码和网上的文章详细研究一下，本文主要是分析eureka（EurekaClient）的初始化过程。
+一直关注spring cloud，以后做微服务必将其发扬光大，所以结合源码和网上的文章详细研究一下，本文主要是分析eureka（EurekaClient）的初始化过程。当需要使用EurekaClient的时候，会使用EnableEurekaClient注解，那么我们就从spring boot项目中的该注解开始（EurekaServer启动过程也类似），下面是EurekaClient启动的调用链的分析。
 
 <!-- toc -->
 
 <!--more-->
-当需要使用EurekaClient的时候，会使用EnableEurekaClient注解，那么我们就从spring boot项目中的该注解开始（EurekaServer启动过程也类似），下面是EurekaClient启动的调用链的分析。
+
 
 ### 1. 加载过程
+
 
 #### 1.1 spring 加载过程
 EnableEurekaClient -> 
