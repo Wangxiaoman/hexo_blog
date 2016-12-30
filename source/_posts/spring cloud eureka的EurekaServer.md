@@ -13,7 +13,6 @@ category: 技术
 - Service Consumer会向Eureka Server获取注册服务列表，并消费服务
 - 代码分析(相关类：eurake-core 包中的ApplicationResource、PeerAwareInstanceRegistry、AbstractInstanceRegistry)
 
-
 <!-- toc -->
 
 <!--more-->
