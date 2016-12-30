@@ -1,4 +1,4 @@
-title: spring cloud eureka的初始化
+title: spring cloud eureka（一） eureka的初始化
 date: 2016-12-29 15:31:49
 tags: [架构,java,spring boot]
 category: 技术
@@ -6,9 +6,11 @@ category: 技术
 
 ### 概述
 
-一直关注spring cloud，以后做微服务必将其发扬光大，所以结合源码和网上的文章详细研究一下，本文主要是分析eureka（EurekaClient）的初始化过程。当需要使用EurekaClient的时候，会使用EnableEurekaClient注解，那么我们就从spring boot项目中的该注解开始（EurekaServer启动过程也类似），下面是EurekaClient启动的调用链的分析。
+一直关注spring cloud，以后微服务必将其发扬光大，所以结合源码和网上的文章详细研究一下。
 
 <!-- toc -->
+
+本文主要是分析eureka（EurekaClient）的初始化过程。当需要使用EurekaClient的时候，会在SpringBootApplication上增加EnableEurekaClient注解，那么我们就从spring boot项目中的EnableEurekaClient注解开始（EurekaServer启动过程也类似）。
 
 <!--more-->
 
@@ -16,7 +18,7 @@ category: 技术
 ### 1. 加载过程
 
 
-#### 1.1 spring 加载过程
+#### 1.1 分析过程
 EnableEurekaClient -> 
 EnableDiscoveryClient -> 
 EnableDiscoveryClientImportSelector -> 
