@@ -1,4 +1,4 @@
-title: spring cloud eurek(二) EurekaClient的分析
+title: spring cloud eurek（二）EurekaClient的分析
 date: 2016-12-29 17:25:49
 tags: [架构,java,spring boot]
 category: 技术
