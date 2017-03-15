@@ -24,7 +24,7 @@ Quick Start
 	java -jar zipkin.jar
 ```
 
-### 2、与spring cloud节点的整合（sleuth）
+### 2、client整合sleuth
 
 #### 2.1 pom的配置
 ```
@@ -74,7 +74,7 @@ Quick Start
 	this.tracer.close(span);
 ```
 
-### 3、定制集成zipkin的服务
+### 3、server整合sleuth
 如果想定制zipkin-server的服务，比如作为服务发现节点、动态配置参数，那么可以自定义一个zipkin-server
 
 #### 3.1 pom的配置
@@ -155,14 +155,14 @@ Quick Start
 	}
 ```
 
-#### 4、图标展示
-按照上面的配置搞定之后，分别启动server、client，先调用几次服务，然后查看zipkin的web站http://localhost:9411/
+### 4、图标展示
+按照上面的配置搞定之后，分别启动rabbitmq、server、client，先调用几次服务，然后查看zipkin的web站http://localhost:9411/
 
-![查询页面](http://7xnz74.com1.z0.glb.clouddn.com/zipkin-server1.png?imageView2/2/w/600)
-![数据展示](http://7xnz74.com1.z0.glb.clouddn.com/zipkin-server2.png?imageView2/2/w/600)
+![查询页面](http://7xnz74.com1.z0.glb.clouddn.com/zipkin-server1.png?imageView2/2/w/1000)
+![数据展示](http://7xnz74.com1.z0.glb.clouddn.com/zipkin-server2.png?imageView2/2/w/1000)
 
 
-### 参考
+### 5、参考
 http://blog.spring-cloud.io/blog/sc-sleuth.html
 http://spring-cloud.io/reference/sleuth/#_3
 http://cloud.spring.io/spring-cloud-static/spring-cloud-sleuth/1.0.9.RELEASE/
