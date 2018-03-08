@@ -1,3 +1,9 @@
+title: Nginx 以及健康检测模块的安装 
+date: 2018-03-08 11:30:49
+tags: [nginx]
+category: 技术
+---
+
 #Nginx 以及健康检测模块的安装 
 
 
