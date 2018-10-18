@@ -1,35 +1,31 @@
 ## java容器
-**目录结构**
-
-容器概述
-Collection
-Map
-实战模拟
-总结
-思考题
+容器类在java语言中是非常重要的，无论是面试还是实际工作中都是重中之重，我们下面就对这个话题深入探讨一下。对于基本实现我们只做简单描述，细节大家可以直接看源码来理解，我们主要的篇幅还是放在实战上。
+<!-- toc -->
 
 ### 容器概述
-我们先看一下“Thinking in java” 一书中对容器的描述：通常，我们的程序需要根据程序运行时才知道的一些标准创建新对象。若非程序正式运行，否则我们根本不知道自己到底需要多少数量的对象，甚至不知道它们的准确类型。为了满足常规编程的需要，我们要求能在任何时候、任何地点创建任意数量的对象。为解决这个非常关键的问题，Java提供了容纳对象（或者对象的句柄）的多种方式。
+对于任何事物的理解，我们还是需要从定义出发，我们看一下“Thinking in java” 一书中对容器的描述：通常，我们的程序需要根据程序运行时才知道的一些标准创建新对象。若非程序正式运行，否则我们根本不知道自己到底需要多少数量的对象，甚至不知道它们的准确类型。为了满足常规编程的需要，我们要求能在任何时候、任何地点创建任意数量的对象。为解决这个非常关键的问题，Java提供了容纳对象（或者对象的句柄）的多种方式。
 
-通过定义可以看出容器类解决的核心问题就是对象的容纳，而在容器类中最重要组成Collection和Map，我们就主要从这两种容器类入手来具体分析它们是怎样存储对象的。
+通过定义可以看出容器类解决的核心就是对象的容纳问题，在容器类中最重要组成是Collection和Map，我们接下来看Collection和Map是如何定义的。
 
 * **Collection**
-Collection的类图如下：
-![集合类图结构](/images/colletion.png "集合类")
 
-**JDK是这样描述**
+**JDK描述**
 A collection represents a group of objects, known as its elements.  Some collections allow duplicate elements and others do not.  Some are ordered and others unordered. 
-**理解下这个含义**
+**含义**
 集合是用来代表一组元素，有些元素允许重复有的不允许，有些有序有些无序。
+**Collection的类图如下**
+![集合类图结构](/images/collection.png "集合类")
 
 * **Map**
-Map的类图如下：
+
+**JDK描述**
+An object that maps keys to values.  A map cannot contain duplicate keys;each key can map to at most one value.
+**含义**
+存储KV映射，key为独立且只对应一个value。
+**Map的类图如下**
 ![Map类图结构](/images/map.png "映射类")
 
-**JDK中是这样描述**
-An object that maps keys to values.  A map cannot contain duplicate keys;each key can map to at most one value.
-**理解下这个含义**
-存储KV映射，key为独立且只对应一个value。
+了解完Collection和Map的定义以及类图中的各类之间的关系，我们下面来实际分析下各种容器类的特性和实现方式。
 
 ### Collection
 #### List
@@ -204,7 +200,7 @@ Guava 中的 collect 包下实现了各种类型的 MutiMap，大家可以看一
 #### ip库服务
 
 **问题描述**
-有一份ip文件，大概有100M以内（每一段至少覆盖100个ip），每天更新一次，格式描述如下（只截取几行）。
+有一份ip文件，大概有200M以内（每一段至少覆盖100个ip），每天更新一次，格式描述如下（只截取几行）。
 
 | 开始ip | 结束ip | 地址| 运营商|
 | --- | --- | --- | --- |
@@ -233,7 +229,7 @@ Guava 中的 collect 包下实现了各种类型的 MutiMap，大家可以看一
 3. 问题分析，大家看了需求和数据的特征，可以先自己思考一下，不妨自己有了一些思路，再来看我的分析。
 
 **实际解决**
-最简方案：将ip转化为Number，直接将数据写入mysql，使用开始ip建立索引。这样服务的并发量基本就是mysql所能承受的并发量，如果自己笔记本电脑的性能，估计QPS上千也就差不多了。（这只是一个估测，因为机器配置和性能对其影响很大）。
+最简方案：将ip转化为Number，直接将数据写入mysql，使用开始ip建立索引。这样服务的并发量基本就是mysql所能承受的并发量，按照题目表数据量大概为百万级，考虑磁盘存储，查询条件又是一个范围查询，性能不会很好，个人估计也就是几百的量级。（这只是一个估测，因为机器配置和性能对其影响很大，也先不考虑数据库的缓存等因素，大家可以自己建表来实践一下）。
 
 简单方案升级：不使用Mysql，我们将ip段的连续数据打散，都存到HashMap中，根据数据分析，基于每段至少覆盖100个ip，那么存储需要占10G(100M * 100)左右的内存。这种方式是典型的以空间换时间，内存存储加上HashMap的高效查询，支持万级QPS不是梦
 
