@@ -32,7 +32,7 @@ An object that maps keys to values.  A map cannot contain duplicate keys;each ke
 
 * ArrayList：底层为数组，支持按照下标访问，访问高效。
 * LinkedList：底层为双向链表，只能支持顺序访问，节点的删除和新增比较高效。
-* 扩展思考：两种list特性实际就是底层数据结构的特性；两种List适用的场景，ArrayList偏重与读的性能，而LinkedList更加偏重写的性能。
+* 扩展思考：两种list特性实际就是底层数据结构的特性；两种List适用的场景，ArrayList偏重读的性能，而LinkedList更加偏重写的性能。
 
 #### Set
 
