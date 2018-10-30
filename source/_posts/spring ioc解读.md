@@ -7,15 +7,15 @@ category: 技术
 ## 理论背景
 我们知道在面向对象设计的软件系统中，它的底层都是由N个对象构成的，各个对象之间通过相互合作，最终实现系统地业务逻辑。
 
-![耦合](http://7xnz74.com1.z0.glb.clouddn.com/ioc1.png?imageView2/2/w/600)
+![耦合](/images/ioc1.png)
 
 齿轮组中齿轮之间的啮合关系,与软件系统中对象之间的耦合关系非常相似。对象之间的耦合关系是无法避免的，也是必要的，这是协同工作的基础。现在，伴随着工业级应用的规模越来越庞大，对象之间的依赖关系也越来越复杂，经常会出现对象之间的多重依赖性关系。
 
-![相互依赖](http://7xnz74.com1.z0.glb.clouddn.com/ioc2.png?imageView2/2/w/600)
+![相互依赖](/images/ioc2.png)
 
 **怎样解耦呢？**
 
-![解耦](http://7xnz74.com1.z0.glb.clouddn.com/ioc3.png?imageView2/2/w/600)
+![解耦](/images/ioc3.png)
 
 ***IoC***：即Inversion of Control（控制反转）的简写，它是一种设计模式，Spring只不过是实现了该模式。
 IoC是工厂模式的升华，同时涉及到了反射的概念。
@@ -42,7 +42,7 @@ IoC最基本的角色有两个：容器(BeanFactory)和Bean本身。这里使用
 - ***BeanFactory***
 里面有一个map，用来存储bean对象，以bean的名字作为key，对象实例作为value。
 
-![step-1](http://7xnz74.com1.z0.glb.clouddn.com/ioc4.png?imageView2/2/w/600)
+![step-1](/images/ioc4.png)
 
 -------------------------
 
@@ -58,7 +58,7 @@ IoC最基本的角色有两个：容器(BeanFactory)和Bean本身。这里使用
 “AutowireCapable"的意思是“可自动装配的”，为我们后面注入属性做准备。
 装配的bean工厂类会实现bean的创建方法doCreateBean，bean的对象创建完之后，会存放在beanDefinitionMap中。
 
-![step-2](http://7xnz74.com1.z0.glb.clouddn.com/ioc5.png?imageView2/2/w/600)
+![step-2](/images/ioc5.png)
 
 -------------------------
 
@@ -71,7 +71,7 @@ IoC最基本的角色有两个：容器(BeanFactory)和Bean本身。这里使用
 - ***AutowireCapableBeanFactory***
 在创建bean方法的实现中，通过反射，使用Field将属性值注入。
 
-![step-3](http://7xnz74.com1.z0.glb.clouddn.com/ioc7.png?imageView2/2/w/600)
+![step-3](/images/ioc7.png)
 
 -------------------------
 
@@ -88,7 +88,7 @@ BeanDefinitionReader：用来解析流，将xml中的数据解析为Map
 
 beanFactory会根据BeanDefinitionReader解析出来的bean信息，创建实例，并注册（beanDefinitionMap）
 
-![step-4](http://7xnz74.com1.z0.glb.clouddn.com/ioc8.png?imageView2/2/w/600)
+![step-4](/images/ioc8.png)
 
 -------------------------
 
@@ -98,17 +98,17 @@ beanFactory会根据BeanDefinitionReader解析出来的bean信息，创建实例
 - ***BeanReference***
 我们定义这个类，来表示这个属性是对另一个bean的引用。在解析的时候，根据xml中的标签将其解析，如果xml中属性的标签为ref，那么用BeanReference对其封装。
 
-![step-5.1](http://7xnz74.com1.z0.glb.clouddn.com/ioc9.png?imageView2/2/w/600)
+![step-5.1](/images/ioc9.png)
 
 - ***AutowireCapableBeanFactory***
 该类中的applyPropertyValues方法，会在读取xml的时候初始化，并在初始化bean的时候，进行解析和真实bean的注入。
 
-![step-5.2](http://7xnz74.com1.z0.glb.clouddn.com/ioc10.png?imageView2/2/w/600)
+![step-5.2](/images/ioc10.png)
 
 - **循环依赖，A注入B，B也注入A**
 我们使用lazy-init的方式，将createBean的事情放到getBean的时候才执行，getBean如下，只有bean不为null的时候，那么才调用BeanFactory的doCreateBean来创建。
 
-![step-5.3](http://7xnz74.com1.z0.glb.clouddn.com/ioc11.png?imageView2/2/w/600)
+![step-5.3](/images/ioc11.png)
 
 **注意：这种循环依赖，只有单例模式下可用**
 如果是多例，是没办法处理的，比如A1依赖B，B依赖A1；A2也依赖B，但是B中的依赖就没法确定是A1还是A2了。
@@ -124,13 +124,13 @@ beanFactory会根据BeanDefinitionReader解析出来的bean信息，创建实例
 - ***ApplicationContext***
 其实也就是封装了之前测试用例中，读取配置、初始化factoryBean、注册bean的过程.
 
-![step-6.1](http://7xnz74.com1.z0.glb.clouddn.com/ioc12.png?imageView2/2/w/600)
+![step-6.1](/images/ioc12.png)
 
 -------------------------
 
 ## 总结
 回头看一下
-![step-6.2](http://7xnz74.com1.z0.glb.clouddn.com/ioc13.png?imageView2/2/w/600)
+![step-6.2](/images/ioc13.png)
 
 **我们的写代码应该怎么做？**
 

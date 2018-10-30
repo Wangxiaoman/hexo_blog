@@ -15,7 +15,7 @@ category: 技术
 
 ### 1 类图
 
-![相关类图](http://7xnz74.com1.z0.glb.clouddn.com/eurekaclass.png)
+![相关类图](/images/eurekaclass.png)
 
 左边的DiscoveryClient和EurekaDiscoveryClient都是spring cloud中的类，实际上就是在EurekaDiscoveryClient中封装了EurekaClient（接口），实际调用其实就是DiscoveryClient类，所以来看一下DiscoveryClient( CloudEurekaClient类继承了DiscoveryClient)。
 

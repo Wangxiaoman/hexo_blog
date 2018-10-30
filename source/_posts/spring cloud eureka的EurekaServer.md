@@ -6,7 +6,7 @@ category: 技术
 
 ### 概述
 本文继续分析eureka中的EurekaServer，下图展示了client、server之间的交互关系。
-![交互图](http://7xnz74.com1.z0.glb.clouddn.com/eurekaServer.png?imageView2/2/w/600)
+![交互图](/images/eurekaServer.png)
 
 - Service Provider会向Eureka Server做Register（服务注册）、Renew（服务续约）、Cancel（服务下线）等操作。
 - Eureka Server之间会做注册服务的同步，从而保证状态一致
@@ -18,7 +18,7 @@ category: 技术
 <!--more-->
 
 
-![注册方法时序图](http://7xnz74.com1.z0.glb.clouddn.com/eurekaServerRegister.png?imageView2/2/w/600)
+![注册方法时序图](/images/eurekaServerRegister.png)
 
 
 ### 1. 实例的注册入口(addInstance方法)
