@@ -158,8 +158,8 @@ Quick Start
 ### 4、图标展示
 按照上面的配置搞定之后，分别启动rabbitmq、server、client，先调用几次服务，然后查看zipkin的web站http://localhost:9411/
 
-![查询页面](http://7xnz74.com1.z0.glb.clouddn.com/zipkin-server1.png?imageView2/2/w/1000)
-![数据展示](http://7xnz74.com1.z0.glb.clouddn.com/zipkin-server2.png?imageView2/2/w/1000)
+![查询页面](/images/zipkin-server1.png?imageView2/2/w/1000)
+![数据展示](/images/zipkin-server2.png?imageView2/2/w/1000)
 
 
 ### 5、参考
