@@ -15,6 +15,8 @@ nginx，选择版本下载
 https://nginx.org/en/download.html
 
 本例中，我选择nginx最新版本(1.13.9),patch选择check_1.12.1+.patch
+-------------------
+<!--more-->
 
 ## 安装
 * 安装gcc
