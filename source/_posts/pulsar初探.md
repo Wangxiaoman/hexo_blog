@@ -9,7 +9,7 @@ Pulsar 是一个多租户，服务器到服务器消息的高性能解决方案�
 <!-- toc -->
 
 
-### 特性
+## 特性
 
 * Pulsar实例原生支持多集群，能够无缝的基于地理位置 进行跨集群的备份.
 * 非常低的消息发布和端到端的延迟.
@@ -22,22 +22,41 @@ Pulsar 是一个多租户，服务器到服务器消息的高性能解决方案�
 * 当数据老化时，分层式存储 将数据从热存储卸载到冷存储中(比如S3、GCS等)
 * 支持sql查询（2.0版本之后）
 
-### 安装
+## 安装
 
 * 从github上直接下载源码或者压缩包（https://pulsar.apache.org/zh-CN/download/）
 * 单机模式，可以直接在bin下启动即可（http://pulsar.apache.org/docs/zh-CN/standalone/）
 * 集群模式，安装部署详情见链接（https://pulsar.apache.org/docs/zh-CN/deploy-bare-metal/）
 
+## 架构图
 
-### 基本使用
+![订阅模型图片](/images/pulsar-system-architecture.png)
 
-
-
-
-#### 命令行操作
+## 基本使用
 
 
-#### 订阅模型
+### 命令行操作
+
+#### 1. pulsar-admin tools
+
+https://pulsar.apache.org/docs/zh-CN/pulsar-admin/
+
+```
+展示topics
+pulsar-admin topics list public/default
+
+创建
+pulsar-admin topics create persistent://public/default/topic9
+
+删除
+pulsar-admin persistent delete  persistent://public/default/topic2
+
+```
+
+#### 2. client tools
+https://pulsar.apache.org/docs/zh-CN/reference-cli-tools/
+
+### 订阅模型
 
 Pulsar有三种订阅模式：exclusive，shared(shared_key)，failover
 
@@ -48,9 +67,9 @@ Pulsar有三种订阅模式：exclusive，shared(shared_key)，failover
 
 ![订阅模型图片](/images/pulsar-subscription-modes.png)
 
-#### Client操作
+### Client操作
 
-1. client
+#### 1. client
 
 client实例创建，默认链接的端口为6650，内部实现使用了netty实现维持长连接
 
@@ -60,7 +79,7 @@ PulsarClient client = PulsarClient.builder().serviceUrl("pulsar://localhost:6650
 client.close();
 ```
 
-2. producer
+#### 2. producer
 
 * 给指定的topic发送数据，producer发送数据，如果检测到没有该topic，会创建这个topic。
 * topic默认的完整描述如下：
@@ -112,7 +131,7 @@ producer.newMessage().send(msg);
 producer.close();
 ```
 
-3. consumer
+#### 3. consumer
 
 创建consumer
 ```
@@ -140,7 +159,7 @@ while (true) {
 
 ```
 
-4. reader
+#### 4. reader
 
 如果想直接从某个位置开始读取队列中的消息，那么可以使用reader根据起始的MessageId进行读取。
 
@@ -162,7 +181,23 @@ while (true) {
 
 ```
 
-5. 相关问题
+从一个队列中最早/最新的消息开始读取
+```
+// Create a reader on a topic and for a specific message (and onward)
+Reader<byte[]> reader = pulsarClient.newReader()
+    .topic("reader-api-test")
+    .startMessageId(MessageId.earliest) // .startMessageId(MessageId.latest)
+    .create();
+
+while (true) {
+    Message message = reader.readNext();
+
+    // Process the message
+}
+
+```
+
+#### 5. 相关问题
 
 * 问题1：新建producer发送到了topic信息，但是consumer创建时间晚于producer，如果想读取到这部分信息，需要通过Reader来获取数据.
 * 问题2：保持Message处理的完全有序，可以使用exclusive，如果需要保持高可用，那么使用failover.
@@ -170,15 +205,15 @@ while (true) {
 * 问题4：在shared_key类型的使用上需要注意，producer不能使用batching的方式提交，否则Shared_key将失效，Shared类型无影响，创建producer的时候注意使用enableBatching(false).
 
 
-#### SQL操作
+### SQL操作
 
-1. 启动SQL Worker
+#### 1. 启动SQL Worker
 
 ```
 	pulsar sql-worker run
 ```
 
-2. 基本SQL命令
+#### 2. 基本SQL命令
 
 命令行打开sql模式
 ```
@@ -201,13 +236,13 @@ select * from pulsar."public/default".ttt limit 50;
 
 ```
 
-3. 相关问题
+#### 3. 相关问题
 
 * 问题1：如果topic名称中带有中划线 “-”，那么查询不到该topic，暂时不太确定怎样转译
 * 问题2：遇到在sql中查询缺失信息的情况，但是通过reader来读取能够读到
 
 
-### 相关文档
+## 相关文档
 
 https://github.com/apache/pulsar
 https://pulsar.apache.org/docs/zh-CN/standalone/（官方文档）
