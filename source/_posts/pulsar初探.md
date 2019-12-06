@@ -245,9 +245,10 @@ select * from pulsar."public/default".ttt limit 50;
 ## 相关文档
 
 https://github.com/apache/pulsar
-https://pulsar.apache.org/docs/zh-CN/standalone/（官方文档）
 https://blog.csdn.net/zpf_940810653842/article/details/95320943
 
+官方文档
+https://pulsar.apache.org/docs/zh-CN/standalone
 pulsar sql 启动
 http://pulsar.apache.org/docs/zh-CN/sql-getting-started/
 
